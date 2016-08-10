@@ -6,40 +6,32 @@
 <head>
 <meta charset="utf-8">
 <title>Welcome to BufferUnderun</title>
-<!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
+<link rel="stylesheet" type="text/css" href="https://fiddle.jshell.net/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="login.css" />
 <style>
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
 
 </style>
 </head>
 <body>
+<header>
+	<span>LOGO</span>
+</header>
 <div class="container">
-	<section id="content">
-		<form action="www.bufferunderrun.com/Auth/Logon" method="post" onsubmit="return validateThis()">
-			<h1>Please Login</h1>
-			<div>
-				<label for="username"></label>
-				<input type="text" name="username" placeholder="Username" id="username" />
-
-			</div>
-			<div>
-				<label for="password"></label>
-				<input type="password" name="password" placeholder="Password" id="password" />
-			</div>
-			<div>
-				<input type="submit" value="Go to Buffer!" />
-<!-- 				<a href="#">Lost your password?</a>
-				<a href="#">Register</a> -->
-			</div>
-
-		</form><!-- form -->
-		<div id="message"></div>
-		
-	</section><!-- content -->
+	<form action="www.bufferunderrun.com/Auth/Logon" method="post" onsubmit="return validateThis()" class="myForm">
+		<h1>Please Login</h1>
+		<div>
+			<label for="username">Username</label>
+			<input type="text" name="username" placeholder="Username" id="username" class="text-entry" />
+		</div>
+		<div>
+			<label for="password">Password</label>
+			<input type="password" name="password" placeholder="Password" id="password" class="text-entry" />
+		</div>
+		<div class="submit-area">
+			<input type="submit" value="Go to Buffer!" class="submit" />
+		</div>
+	</form><!-- form -->
+	<div id="message" class="warning"></div>
 </div><!-- container -->
 <script>
 
@@ -48,10 +40,6 @@
 		var message = document.getElementById('message');
 		var username = document.getElementById('username');
 		var password = document.getElementById('password');
-		// var unRegexp = /^[A-Za-z0-9_]{3,20}$/;  // no spesh chars except _ , min 3, max 20 chars
-		// var pwRegexp = /[A-Za-z0-9!@#$%^&*()_]{6,20}$/;  // allows spesh chars, min 6, max 20 chars
-		var errors = "";
-
 		var unRegexp = /^[A-Za-z0-9_]{3,20}$/;  // no spesh chars except _ , min 3, max 20 chars
 		var pwRegexp = /[A-Za-z0-9!@#$%^&*()_]{6,20}$/;  // allows spesh chars, min 6, max 20 chars
 
@@ -64,29 +52,35 @@
 	}
 
 	function hasText(el, errMsg){
-		var value = el.value;
-		if(value == '' || value == null) {
+
+		if(el.value == '' || el.value == null) {
 			message.innerHTML = errMsg;
+			message.style.display = "block";
 			el.focus();
+
 			return false;
 		} 
 		return true;
 	}
 
 	function isValid(regex, el, errMsg){
+	
+		
 		if(!regex.test(el.value)) { 
 			message.innerHTML = errMsg;
+			message.style.display = "block";
 			el.focus();
+
 			return false;
 		}
 		return true;
 	}
 
 	function validElement(el, regex){
-		if(!hasText(el, el.placeholder + " is required"))
+		if(!hasText(el, el.placeholder + " is required!"))
 			return false;
 
-		if(!isValid(regex, el, el.placeholder + " is invalid"))
+		if(!isValid(regex, el, el.placeholder + " is invalid!"))
 			return false;
 
 		return true;
@@ -167,3 +161,8 @@
 </script>
 </body>
 </html>
+
+
+
+<!-- 				<a href="#">Lost your password?</a>
+			<a href="#">Register</a> -->
