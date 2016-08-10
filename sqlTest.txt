@@ -1,0 +1,23 @@
+1. one to many - can have only one seller (per sellerID) but can have many requests per seller.
+2. select * from Request where sellerId = 1;
+3. SELECT sellerId, count(*) from Request group by sellerId;
+4. Select most frequent only:
+    SELECT requestOperation
+    from Request 
+    group by requestOperation
+    order by count(requestOperation) Desc
+    limit 1
+
+  Select most frequent and also display how many times:
+    SELECT requestOperation, count(requestOperation) as frequency
+    from Request 
+    group by requestOperation
+    order by frequency Desc
+    limit 1
+
+5. SELECT a.sellerCountry as country, count(b.requestId) as requests
+    from Seller a 
+    left join Request b on b.sellerId = a.sellerId
+    group by country
+    order by orders Desc
+    limit 10

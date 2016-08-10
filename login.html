@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7 ielt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Welcome to BufferUnderun</title>
+<!-- <link rel="stylesheet" type="text/css" href="style.css" /> -->
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+</style>
+</head>
+<body>
+<div class="container">
+	<section id="content">
+		<form action="www.bufferunderrun.com/Auth/Logon" method="post" onsubmit="return validateThis()">
+			<h1>Please Login</h1>
+			<div>
+				<label for="username"></label>
+				<input type="text" name="username" placeholder="Username" id="username" />
+
+			</div>
+			<div>
+				<label for="password"></label>
+				<input type="password" name="password" placeholder="Password" id="password" />
+			</div>
+			<div>
+				<input type="submit" value="Go to Buffer!" />
+<!-- 				<a href="#">Lost your password?</a>
+				<a href="#">Register</a> -->
+			</div>
+
+		</form><!-- form -->
+		<div id="message"></div>
+		
+	</section><!-- content -->
+</div><!-- container -->
+<script>
+
+	function validateThis() {
+
+		var message = document.getElementById('message');
+		var username = document.getElementById('username');
+		var password = document.getElementById('password');
+		// var unRegexp = /^[A-Za-z0-9_]{3,20}$/;  // no spesh chars except _ , min 3, max 20 chars
+		// var pwRegexp = /[A-Za-z0-9!@#$%^&*()_]{6,20}$/;  // allows spesh chars, min 6, max 20 chars
+		var errors = "";
+
+		var unRegexp = /^[A-Za-z0-9_]{3,20}$/;  // no spesh chars except _ , min 3, max 20 chars
+		var pwRegexp = /[A-Za-z0-9!@#$%^&*()_]{6,20}$/;  // allows spesh chars, min 6, max 20 chars
+
+		if(!validElement(username, unRegexp))
+			return false;
+		if(!validElement(password, pwRegexp))
+			return false;
+
+		return true;
+	}
+
+	function hasText(el, errMsg){
+		var value = el.value;
+		if(value == '' || value == null) {
+			message.innerHTML = errMsg;
+			el.focus();
+			return false;
+		} 
+		return true;
+	}
+
+	function isValid(regex, el, errMsg){
+		if(!regex.test(el.value)) { 
+			message.innerHTML = errMsg;
+			el.focus();
+			return false;
+		}
+		return true;
+	}
+
+	function validElement(el, regex){
+		if(!hasText(el, el.placeholder + " is required"))
+			return false;
+
+		if(!isValid(regex, el, el.placeholder + " is invalid"))
+			return false;
+
+		return true;
+	}
+
+	// function validUname(username) {
+	// 	var unRegexp = /^[A-Za-z0-9_]{3,20}$/;  // no spesh chars except _ , min 3, max 20 chars
+		
+	// 	if(!hasText(username, "Username is required"))
+	// 		return false;
+
+	// 	if(!isValid(unRegexp, username, "Username is invalid"))
+	// 		return false;
+
+	// 	return true;
+	// }
+
+	// function validPword(password) {
+	// 	var pwRegexp = /[A-Za-z0-9!@#$%^&*()_]{6,20}$/;  // allows spesh chars, min 6, max 20 chars
+		
+	// 	if(!hasText(password, "Password is required"))
+	// 		return false;
+
+	// 	if(!isValid(pwRegexp, password, "Password is invalid"))
+	// 		return false;
+
+	// 	return true;
+	// }
+
+	// function validateThis() {
+
+	// 	var message = document.getElementById('message');
+	// 	var username = document.getElementById('username').value;
+	// 	var password = document.getElementById('password').value;
+	// 	var unRegexp = /^[A-Za-z0-9_]{3,20}$/;  // no spesh chars except _ , min 3, max 20 chars
+	// 	var pwRegexp = /[A-Za-z0-9!@#$%^&*()_]{6,20}$/;  // allows spesh chars, min 6, max 20 chars
+	// 	var errors = "";
+
+	// 	if(username === '' || password === '') {
+	// 		message.innerHTML = "Incomplete Fields!";
+	// 		return false;
+	// 	} 
+
+	// 	if(!unRegexp.test(username) || !pwRegexp.test(password)) {
+	// 		message.innerHTML = "Incorrect Characters Used";
+	// 		return false;
+	// 	}
+
+	// 	return true;
+	// }
+
+	// function validateThis(e) {
+	// 	e.preventDefault();
+ //      var msg = [];
+ //      var myArray = $( '#form' ).serializeArray();
+ //      for (i=0; i < myArray.length; i++) {
+ //        // console.log(myArray[i].value);
+ //        if(myArray[i].value == "") {
+ //          var cleanName = myArray[i].name.replace(/-/g, " ");
+ //          msg.push(cleanName);
+ //        }
+ //      }
+ //      if(msg.length > 0) {
+ //        console.log("message-length: ",msg.length);
+ //        var string = msg.join(', ');
+ //        // $('div.alert').removeClass('hidden');
+ //        console.log(string);
+ //        // $('div.alert p').html('Incomplete fields: ' + string);
+ //        console.log('false');
+ //        return false;
+ //      }
+ //      else {
+ //        return true;
+ //        console.log("true");
+ //      }
+ //    }
+
+</script>
+</body>
+</html>
